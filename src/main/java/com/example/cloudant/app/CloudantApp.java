@@ -51,6 +51,26 @@ public class CloudantApp extends SpringBootServletInitializer {
 		return repository.getAll();
 	}
 
+	@RequestMapping(value = "{id}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> getById(@PathVariable String id) {
+		Employee employee = repository.get(id);
+		if (employee == null)
+			return new ResponseEntity<ApplicationError>(
+					new ApplicationError(HttpStatus.NOT_FOUND.value(), "specified ID does not exist"),
+					HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<Employee>>(repository.getAll(), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/band/{band}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> getAllByBand(@PathVariable String band) {
+		List<Employee> employeesByBand = repository.findByBand(band);
+		if (employeesByBand == null)
+			return new ResponseEntity<ApplicationError>(
+					new ApplicationError(HttpStatus.NOT_FOUND.value(), "no employees by specified band exist"),
+					HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<Employee>>(employeesByBand, HttpStatus.OK);
+	}
+
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<?> create(@RequestBody Employee emp) {
 		repository.add(emp);
@@ -62,7 +82,8 @@ public class CloudantApp extends SpringBootServletInitializer {
 		Employee employee = repository.get(id);
 		if (employee == null)
 			return new ResponseEntity<ApplicationError>(
-					new ApplicationError(HttpStatus.NOT_FOUND.value(), "ID to be deleted not found"), HttpStatus.NOT_FOUND);
+					new ApplicationError(HttpStatus.NOT_FOUND.value(), "ID to be deleted not found"),
+					HttpStatus.NOT_FOUND);
 		repository.remove(repository.get(id));
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
@@ -72,7 +93,8 @@ public class CloudantApp extends SpringBootServletInitializer {
 		Employee employee = repository.get(id);
 		if (employee == null)
 			return new ResponseEntity<ApplicationError>(
-					new ApplicationError(HttpStatus.NOT_FOUND.value(), "ID to be deleted not found"), HttpStatus.NOT_FOUND);
+					new ApplicationError(HttpStatus.NOT_FOUND.value(), "ID to be deleted not found"),
+					HttpStatus.NOT_FOUND);
 		employee.setName(emp.getName());
 		employee.setBand(emp.getBand());
 		repository.update(employee);
