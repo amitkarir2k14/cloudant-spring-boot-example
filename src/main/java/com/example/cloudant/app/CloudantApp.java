@@ -85,8 +85,8 @@ public class CloudantApp extends SpringBootServletInitializer {
 		try {
 			repository.add(emp);
 		} catch (UpdateConflictException ex) {
-			return new ResponseEntity<ApplicationError>(new ApplicationError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-					"update conflicted, add was aborted"), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<ApplicationError>(new ApplicationError(HttpStatus.BAD_REQUEST.value(),
+					"update conflicted, add was aborted. Please check your payload"), HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Employee>(emp, HttpStatus.CREATED);
 	}
