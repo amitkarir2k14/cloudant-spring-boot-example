@@ -1,11 +1,7 @@
 package com.example.cloudant.app.error;
 
-public class ApplicationError extends RuntimeException {
+public class ApplicationError {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1332127140175131253L;
 	private int id;
 	private String message;
 
