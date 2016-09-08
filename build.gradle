@@ -7,17 +7,35 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath('se.transmode.gradle:gradle-docker:1.2')
 	}
 }
+
+group = 'amitkarir'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
-apply plugin: 'war'
+//apply plugin: 'war'
+//apply plugin: "jar"
+apply plugin: "docker"
+
+task buildDocker(type: Docker, dependsOn: build) {
+  push = true
+  applicationName = jar.baseName
+  dockerfile = file('src/main/docker/Dockerfile')
+  doFirst {
+    copy {
+      from jar
+      from "src/main/resources/spring-cloud.properties"
+      into stageDir
+    }
+  }
+}
 
 jar {
-	baseName = 'demo'
-	version = '0.0.1-SNAPSHOT'
+	baseName = 'cloudant-spring-boot-example'
+	version = '0.0.1'
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
