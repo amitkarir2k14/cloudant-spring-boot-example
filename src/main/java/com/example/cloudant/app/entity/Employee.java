@@ -1,20 +1,42 @@
 package com.example.cloudant.app.entity;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import java.util.Date;
+import java.util.List;
 
-//@JsonIgnoreProperties({ "_id", "_rev" })
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 public class Employee {
 
 	@JsonProperty("_id")
 	private String id;
 	@JsonProperty("_rev")
 	private String revision;
-//	@JsonProperty("employeeName")
 	private String name;
-//	@JsonProperty("employeeBand")
 	private String band;
+	private String location;
 
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	private List<SkillSet> skills;
+	private Date doj;
+
+	@JsonSerialize(using = EmployeeDateSerializer.class)
+	public Date getDoj() {
+		return doj;
+	}
+	
+	@JsonDeserialize(using=EmployeeDateDeserializer.class)
+	public void setDoj(Date doj) {
+		this.doj = doj;
+	}
 
 	public String getId() {
 		return id;
@@ -34,6 +56,14 @@ public class Employee {
 
 	public String getName() {
 		return name;
+	}
+
+	public List<SkillSet> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<SkillSet> skills) {
+		this.skills = skills;
 	}
 
 	public void setName(String name) {
