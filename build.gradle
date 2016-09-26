@@ -1,4 +1,4 @@
-buildscript {
+buildscript {	
 	ext {
 		springBootVersion = '1.4.0.RELEASE'
 	}
@@ -20,7 +20,7 @@ apply plugin: 'spring-boot'
 //apply plugin: "jar"
 apply plugin: "docker"
 
-task buildDocker(type: Docker, dependsOn: build) {
+task dockerImage(type: Docker, dependsOn: build) {
   push = true
   applicationName = jar.baseName
   dockerfile = file('src/main/docker/Dockerfile')
@@ -51,5 +51,7 @@ dependencies {
 	compile('org.springframework.cloud:spring-cloud-spring-service-connector')
 	compile('net.bluemix:bluemix-cloud-connectors-cloudfoundry:0.0.1.RC6')
 	compile('net.bluemix:bluemix-cloud-connectors-local:0.0.1.RC6')
+	compile('io.springfox:springfox-swagger2:2.4.0')
+	compile('io.springfox:springfox-swagger-ui:2.4.0')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

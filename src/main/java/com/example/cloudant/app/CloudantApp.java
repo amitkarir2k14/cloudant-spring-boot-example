@@ -28,7 +28,6 @@ import com.example.cloudant.app.error.ApplicationError;
  *
  * @author amit, @date 9/6/16 11:48 AM
  */
-@SuppressWarnings("deprecation")
 @SpringBootApplication
 @RestController
 @RequestMapping("/employee")
