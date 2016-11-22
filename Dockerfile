@@ -8,5 +8,5 @@ ADD build/libs/cloudant-spring-boot-example-0.0.1.jar app.jar
 COPY src/main/resources/spring-cloud.properties /usr/local/spring-cloud.properties
 
 RUN sh -c 'touch /app.jar'
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+CMD java -Djava.security.egd=file:/dev/./urandom -jar app.jar
 
