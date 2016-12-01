@@ -155,7 +155,7 @@ stages:
       url: ${CF_TARGET_URL}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
-    PORT: '80'
+    PORT: '8765'
     DEPLOY_TYPE: red_black
     CONTAINER_NAME: spring-boot-employee-container-group
     COMMAND: "#!/bin/bash\n# The following are some example deployment scripts.  Use\

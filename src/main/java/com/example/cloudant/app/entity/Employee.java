@@ -6,8 +6,9 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 
-
+@JsonSerialize(include = Inclusion.NON_NULL)
 public class Employee {
 
 	@JsonProperty("_id")
