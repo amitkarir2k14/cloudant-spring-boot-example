@@ -54,7 +54,7 @@ stages:
       application: cloudant-spring-boot-example
     script: |
       #!/bin/bash
-      cf push "${CF_APP}" -p build/libs/SpringBootCloudantServiceExample.war -m 512M --random-route --no-start
+      cf push "${CF_APP}" -p build/libs/SpringBootCloudantBluemixExample.war -m 512M --random-route --no-start
       cf bind-service "${CF_APP}" "MyCloudantService"
       cf start "${CF_APP}"
 - name: ContainerBridge
@@ -143,6 +143,9 @@ stages:
     type: text
   - name: ROUTE_HOSTNAME
     value: ${CF_APP}
+    type: text
+     name: AUTO_RECOVERY
+    value: 'true'
     type: text
   jobs:
   - name: Deploy

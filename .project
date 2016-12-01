@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>SpringBootCloudantServiceExample</name>
-	<comment>Project SpringBootCloudantServiceExample created by Buildship.</comment>
+	<name>SpringBootCloudantBluemixExample</name>
+	<comment>Project SpringBootCloudantBluemixExample created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
